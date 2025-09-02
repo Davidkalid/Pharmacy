@@ -21,7 +21,7 @@
   - [x] Root scripts (lint, format, typecheck, build, test)
   - [x] .editorconfig, .gitattributes, .gitignore
   - [x] packages/config: shared tsconfig base
-  - [ ] packages/eslint-config: ESLint + Prettier (TS strict)
+  - [x] packages/eslint-config: ESLint + Prettier (TS strict)
 - [ ] Infrastructure and environment (MySQL via XAMPP)
   - [ ] Create DB + least-privilege user; STRICT_TRANS_TABLES; TZ=UTC
   - [ ] .env/.env.example for root/apps (MySQL URI, JWT secrets)
@@ -141,6 +141,7 @@
   - [ ] Dockerize apps (DB external), env configs, backup scheduler, upgrade strategy
 - [ ] Final cleanup
   - [ ] Remove unused deps; license headers; tag v1.0.0
+
 
 
 
