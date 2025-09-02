@@ -1,4 +1,4 @@
-﻿- [x] Confirm scope, requirements, and stack decisions
+- [x] Confirm scope, requirements, and stack decisions
   - [x] Multi-tenant, multi-store (Ethiopia MoH APTS, IFRR/RRF official templates, STGs)
   - [x] Devices: barcode + thermal printers
   - [x] Offline-first for all workflows (PWA + Dexie + background sync)
@@ -141,6 +141,8 @@
   - [ ] Dockerize apps (DB external), env configs, backup scheduler, upgrade strategy
 - [ ] Final cleanup
   - [ ] Remove unused deps; license headers; tag v1.0.0
+
+
 
 
 
