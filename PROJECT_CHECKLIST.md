@@ -16,7 +16,7 @@
   - [x] Create README.md and PROJECT_CHECKLIST.md (paste this checklist)
   - [x] Initial commit and tag v0.0.0
   - [x] Add GitHub remote and push main + tags
-- [ ] Bootstrap pnpm monorepo workspace
+- [x] Bootstrap pnpm monorepo workspace
   - [x] Root package.json with workspaces (apps/api, apps/web, packages/db, packages/config, packages/eslint-config, packages/customization-sdk)
   - [x] Root scripts (lint, format, typecheck, build, test)
   - [x] .editorconfig, .gitattributes, .gitignore
@@ -141,6 +141,7 @@
   - [ ] Dockerize apps (DB external), env configs, backup scheduler, upgrade strategy
 - [ ] Final cleanup
   - [ ] Remove unused deps; license headers; tag v1.0.0
+
 
 
 

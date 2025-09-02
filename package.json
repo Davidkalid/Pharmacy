@@ -19,5 +19,8 @@
     "dev": "pnpm -r --parallel --if-present dev",
     "build": "pnpm -r --if-present build",
     "test": "pnpm -r --if-present test"
+  },
+  "devDependencies": {
+    "prettier": "^3.6.2"
   }
 }
