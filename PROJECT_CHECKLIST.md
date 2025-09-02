@@ -1,0 +1,144 @@
+﻿- [x] Confirm scope, requirements, and stack decisions
+  - [x] Multi-tenant, multi-store (Ethiopia MoH APTS, IFRR/RRF official templates, STGs)
+  - [x] Devices: barcode + thermal printers
+  - [x] Offline-first for all workflows (PWA + Dexie + background sync)
+  - [x] Real-time synchronization (WS/SSE)
+  - [x] Architecture: modular monolith (microservices-ready)
+  - [x] Language: English (v1)
+  - [x] Charts: ECharts
+  - [x] Payments: generic/mobile money manual (v1)
+  - [x] Fully customizable web app (Odoo/ERPNext-style) — custom fields/entities, workflows, scripts (sandboxed), report/print builders, marketplace, governance
+  - [x] Compliance: FEFO enforcement, bin cards/stock registers, ABC-VEN, IFRR/RRF, <2% wastage KPI, audits, six-step dispensing, controlled meds rules
+  - [x] Fraud prevention: duplicate dispensing checks, override approvals (ChangeRequest), anomaly reports
+- [ ] Create project repository and save master to-do file
+  - [x] Confirm repo path and GitHub remote URL
+  - [x] Create workspace directory and initialize Git repo (main branch)
+  - [x] Create README.md and PROJECT_CHECKLIST.md (paste this checklist)
+  - [ ] Initial commit and tag v0.0.0
+  - [ ] Add GitHub remote and push main + tags
+- [ ] Bootstrap pnpm monorepo workspace
+  - [ ] Root package.json with workspaces (apps/api, apps/web, packages/db, packages/config, packages/eslint-config, packages/customization-sdk)
+  - [ ] Root scripts (lint, format, typecheck, build, test)
+  - [ ] .editorconfig, .gitattributes, .gitignore
+  - [ ] packages/config: shared tsconfig base
+  - [ ] packages/eslint-config: ESLint + Prettier (TS strict)
+- [ ] Infrastructure and environment (MySQL via XAMPP)
+  - [ ] Create DB + least-privilege user; STRICT_TRANS_TABLES; TZ=UTC
+  - [ ] .env/.env.example for root/apps (MySQL URI, JWT secrets)
+  - [ ] Connectivity test script from Node
+- [ ] API contract hardening (v1)
+  - [ ] /api/v1, pagination/filter/sort, error shape, idempotency keys, rate limits
+  - [ ] Soft delete + optimistic locking
+- [ ] Database package (packages/db) with Prisma (MySQL)
+  - [ ] Multi-tenancy & branches: Tenants, Branches, Warehouses/Locations/Bins, POSRegister, CashDrawer, POSShift
+  - [ ] Core system: User, Role, Permission, RBACMatrix, DocumentSequence, FiscalSequence (POS numbering & fiscal controls), AuditLog (request_id, user_agent, ip), TaxRule, Currency, FxRate, FeatureFlag, Notification, ChangeRequest, IdempotencyKey, Attachment/File
+  - [ ] Catalog & Formulary: Product, Category, Manufacturer, UnitOfMeasure, PricingTier, PriceList, PriceListItem, compliance flags; FormularyItem (VEN), STGMapping
+  - [ ] Inventory & Batches: MedicineBatch (supplier_id, received_qty, unit_cost, status, batch_no, mfg_date, exp_date), InventoryTransaction (stock moves), InventoryReservation (FEFO), StockTake/Item, InventorySnapshot, StockRegisterEntry, BinCardEntry
+  - [ ] Purchases & Accounts Payable: Supplier, PurchaseOrder/Item (workflow), GoodsReceipt (variance flags), SupplierInvoice (Bill), SupplierPayment, BillPayment, PaymentTerm, PaymentMethod, AP aging
+  - [ ] Sales & Accounts Receivable: SalesInvoice (branch, pos, shift, status, currency, fx_rate, due_amount), InvoiceItem (tax/discount), Payment (cash/card/mobile/transfer), InvoicePayment (split tenders), Discount/Promotion, LoyaltyAccount/Transaction, Returns/Exchanges, POSZReport/EOD
+  - [ ] Patients & Prescriptions: Patient, Prescriber, Prescription/Item, CounselingLog, DispenseChecklist, DispenseDocument
+  - [ ] Insurance: Payer, Policy, Claim, ClaimItem
+  - [ ] Financials (Minimal GL): Account (COA), JournalEntry/Line (balanced), FiscalPeriod (open/close), posting map (PO/GRN/Bill/Payment, Sales/Receipt/Return, Inventory)
+  - [ ] Performance & Feedback: KPIRecord, Feedback, SurveyTemplate, ReviewCycle, ActionItem
+  - [ ] Reporting: IFRR, RRF, views (KPIs/ABC-VEN/expiry/sales/prescribers)
+  - [ ] Concurrency + deletion: deleted_at/by, row_version
+  - [ ] Generate Prisma client, initial migration, seed data
+- [ ] API app scaffold (apps/api)
+  - [ ] Fastify TS server (tsx), CORS, Helmet, Swagger, rate-limit, request-id
+  - [ ] Zod validation, config loader (dotenv+zod), Prisma integration, graceful shutdown
+  - [ ] Global error handler, healthcheck, OpenAPI docs
+  - [ ] Realtime hub: WS/SSE gateway, auth, entity subscriptions
+  - [ ] Extension system: module loader (manifest), route/hook extension points, migrations, sandboxed scripts
+- [ ] Authentication & authorization
+  - [ ] Argon2, password policy, JWT access/refresh rotation, blacklist on logout
+  - [ ] RBAC guard; permission checks; role dashboards; device/user-agent capture
+  - [ ] Session endpoints; audit security events
+- [ ] Domain: Catalog & Inventory
+  - [ ] FEFO with reservations; expiry enforcement (block expired)
+  - [ ] CRUD catalog; batch/stock lookups; adjustments; inter-branch transfers
+  - [ ] Locations/bins; bin cards; stock register; cycle counts
+  - [ ] Alerts: low-stock, nearing-expiry, recalls/quarantine
+  - [ ] Realtime: push stock changes
+- [ ] Domain: Purchases & Accounts Payable
+  - [ ] PO workflow; numbering + idempotency
+  - [ ] GRN posting with batch creation; variance flags; cost layers
+  - [ ] Supplier bills from GRN/manual; approvals on high variance
+  - [ ] Supplier payments; bill allocations; AP aging
+  - [ ] Supplier returns
+- [ ] Domain: Sales/Dispensing (Web POS)
+  - [ ] POS: scan/add, FEFO, block expired
+  - [ ] Discounts/promotions; split tenders; loyalty earn/burn; change due
+  - [ ] Shifts/cash drawers; EOD Z report; fiscal controls
+  - [ ] Returns/exchanges; stock reversals
+  - [ ] Realtime: invoice/drawer/shift events
+- [ ] Domain: Patients & Prescriptions
+  - [ ] Dispense validation; interaction alerts; controlled meds approval
+  - [ ] Attachments; counseling; one-stop dispensing
+- [ ] Domain: Compounding & Repackaging
+  - [ ] Components consumption; batch yield; traceability; QA release
+- [ ] Domain: Insurance/Third-party Billing
+  - [ ] Claims workflow; adjudication; remittances; reports
+- [ ] Domain: APTS, Accountability & Transparency
+  - [ ] Unique codes (PO/GRN/Bill/Issue/Return/Adjustment/Sale)
+  - [ ] IFRR/RRF data models + official printouts (Ethiopia)
+  - [ ] Monthly financial and quarterly service audits; random audit sampling
+  - [ ] Posted-doc immutability; change history; wastage KPI
+- [ ] Domain: Performance Evaluation & Feedback
+  - [ ] KPI calculators/rollups/trends; alerts (e.g., wastage >2%)
+  - [ ] Feedback → action items; dashboards by store/user/period
+- [ ] Fraud prevention & compliance
+  - [ ] Duplicate dispensing/Rx validity checks; high-risk patterns
+  - [ ] Second approval for price/stock overrides (ChangeRequest)
+  - [ ] Prescriber anomaly reports; user/device fingerprinting
+- [ ] Frontend scaffold (apps/web)
+  - [ ] Next.js 14 (TS), Tailwind, route guards, auth pages, RBAC menus
+  - [ ] API client with Zod; React Query; PWA (manifest, icons, SW)
+  - [ ] Realtime client (WS/SSE)
+  - [ ] Customization Studio: form/workflow/report/print/list/theme builders; marketplace
+- [ ] Frontend: Core UX
+  - [ ] Catalog grids/batches/logs
+  - [ ] Inventory: stock, adjustments, transfers, bin cards, stock register, alerts, counts
+  - [ ] Suppliers & PO: create/approve/receive; variance markers; bills/payments
+  - [ ] APTS: IFRR/RRF entry & prints; audit tools
+  - [ ] Supply chain: VEN/STG formulary, forecasting, resupply schedules
+  - [ ] Customers: list/create/profile/history; loyalty
+  - [ ] POS: discounts, split tenders, invoice print, shift/cash drawer
+  - [ ] Dispensing: six-step with approvals & counseling
+  - [ ] Reports: sales, P&L (batch costs), AP aging, GL (trial balance/ledger), stock movement, expiry exposure, prescriber analytics, ABC-VEN
+  - [ ] Admin: users/roles/tenants/branches/warehouses/registers
+- [ ] Offline-first capabilities (all flows)
+  - [ ] Dexie schema: queues/caches/reservations/shifts/drawers/metadata
+  - [ ] Conflict resolution: LWW + domain guards; compensating transactions
+  - [ ] Offline flows: POS/Dispensing, StockTake, Adjustments, Transfers, GRN, PO, Customers, Prescriptions, Supplier bills/payments
+  - [ ] Sync diagnostics page (replay/clear/export)
+- [ ] Barcodes & Printing (web)
+  - [ ] Barcode scanning (hardware wedge; optional webcam)
+  - [ ] Labels (product/shelf/prescription); thermal print CSS
+  - [ ] Receipts; IFRR/RRF PDFs; fiscal sequence on print
+- [ ] Testing
+  - [ ] Unit: inventory math/FEFO/reservations; pricing; permissions; KPI; customization engine
+  - [ ] Unit: GL posting map; fiscal period enforcement; sequence monotonicity
+  - [ ] Integration: API + MySQL (idempotency, optimistic locking)
+  - [ ] E2E: login→sale→split tender→receipt; PO→GRN→bill→payment; IFRR→resupply; six-step dispense; custom field→report; EOD Z report
+- [ ] Observability & reliability
+  - [ ] Structured logs with request_id; error pages; health/liveness/readiness
+- [ ] Security hardening
+  - [ ] Zod validation; secrets mgmt; CORS/Helmet; rate limiting; brute-force protection
+  - [ ] PII minimization; optional AES field encryption; RBAC review
+  - [ ] Script sandbox limits and allowlist
+- [ ] Documentation
+  - [ ] README; architecture; ADRs; SOP mapping; API docs; user guides
+  - [ ] ERD; wireframes; role/permission matrix; financial docs (COA/posting map/fiscal controls)
+  - [ ] Dev guide for extensions; sample module
+- [ ] CI/CD
+  - [ ] GitHub Actions (install/lint/typecheck/test/build/swagger)
+  - [ ] Cache pnpm/Prisma; MySQL service; E2E; extension validation job
+- [ ] Data import/export
+  - [ ] CSV importers; exports (CSV/Excel/PDF); import/export customizations; COA/opening balances; vendor import
+- [ ] Performance and scale
+  - [ ] Indexes/EXPLAIN; pagination/filtering; background jobs; metadata caching
+- [ ] Deployment (later)
+  - [ ] Dockerize apps (DB external), env configs, backup scheduler, upgrade strategy
+- [ ] Final cleanup
+  - [ ] Remove unused deps; license headers; tag v1.0.0
+
