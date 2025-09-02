@@ -1,4 +1,4 @@
-- [x] Confirm scope, requirements, and stack decisions
+﻿- [x] Confirm scope, requirements, and stack decisions
   - [x] Multi-tenant, multi-store (Ethiopia MoH APTS, IFRR/RRF official templates, STGs)
   - [x] Devices: barcode + thermal printers
   - [x] Offline-first for all workflows (PWA + Dexie + background sync)
@@ -7,7 +7,7 @@
   - [x] Language: English (v1)
   - [x] Charts: ECharts
   - [x] Payments: generic/mobile money manual (v1)
-  - [x] Fully customizable web app (Odoo/ERPNext-style) — custom fields/entities, workflows, scripts (sandboxed), report/print builders, marketplace, governance
+  - [x] Fully customizable web app (Odoo/ERPNext-style) â€” custom fields/entities, workflows, scripts (sandboxed), report/print builders, marketplace, governance
   - [x] Compliance: FEFO enforcement, bin cards/stock registers, ABC-VEN, IFRR/RRF, <2% wastage KPI, audits, six-step dispensing, controlled meds rules
   - [x] Fraud prevention: duplicate dispensing checks, override approvals (ChangeRequest), anomaly reports
 - [ ] Create project repository and save master to-do file
@@ -85,7 +85,7 @@
   - [ ] Posted-doc immutability; change history; wastage KPI
 - [ ] Domain: Performance Evaluation & Feedback
   - [ ] KPI calculators/rollups/trends; alerts (e.g., wastage >2%)
-  - [ ] Feedback → action items; dashboards by store/user/period
+  - [ ] Feedback â†’ action items; dashboards by store/user/period
 - [ ] Fraud prevention & compliance
   - [ ] Duplicate dispensing/Rx validity checks; high-risk patterns
   - [ ] Second approval for price/stock overrides (ChangeRequest)
@@ -119,7 +119,7 @@
   - [ ] Unit: inventory math/FEFO/reservations; pricing; permissions; KPI; customization engine
   - [ ] Unit: GL posting map; fiscal period enforcement; sequence monotonicity
   - [ ] Integration: API + MySQL (idempotency, optimistic locking)
-  - [ ] E2E: login→sale→split tender→receipt; PO→GRN→bill→payment; IFRR→resupply; six-step dispense; custom field→report; EOD Z report
+  - [ ] E2E: loginâ†’saleâ†’split tenderâ†’receipt; POâ†’GRNâ†’billâ†’payment; IFRRâ†’resupply; six-step dispense; custom fieldâ†’report; EOD Z report
 - [ ] Observability & reliability
   - [ ] Structured logs with request_id; error pages; health/liveness/readiness
 - [ ] Security hardening
@@ -141,6 +141,7 @@
   - [ ] Dockerize apps (DB external), env configs, backup scheduler, upgrade strategy
 - [ ] Final cleanup
   - [ ] Remove unused deps; license headers; tag v1.0.0
+
 
 
 

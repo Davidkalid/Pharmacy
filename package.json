@@ -1,14 +1,14 @@
-{
-  "name": "pharmacy",
-  "private": true,
-  "version": "0.0.0",
-  "engines": {
-    "node": ">=20.0.0",
-    "pnpm": ">=9.0.0"
-  },
-  "packageManager": "pnpm@9.10.0",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ]
+﻿{
+    "name":  "pharmacy",
+    "private":  true,
+    "version":  "0.0.0",
+    "engines":  {
+                    "node":  "\u003e=20.0.0",
+                    "pnpm":  "\u003e=9.0.0"
+                },
+    "packageManager":  "pnpm@9.10.0",
+    "workspaces":  [
+                       "apps/*",
+                       "packages/*"
+                   ]
 }
